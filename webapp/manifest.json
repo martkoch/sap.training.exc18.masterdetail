@@ -1,0 +1,109 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "sap.training.exc18.masterdetail",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"TravelService": {
+				"uri": "/sap/opu/odata/sap/ZBC_TRAVEL_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": "sap.training.exc18.masterdetail.view.App",
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.training.exc18.masterdetail.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "TravelService"
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "sap.training.exc18.masterdetail.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "detailPages",
+				"bypassed": {
+					"target": [
+						"master",
+						"notFound"
+					]
+				}
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "master",
+				"target": [
+					"object",
+					"master"
+				]
+			}, {
+				"pattern": "Carriers/{objectId}",
+				"name": "object",
+				"target": [
+					"master",
+					"object"
+				]
+			}],
+			"targets": {
+				"master": {
+					"viewName": "Master",
+					"viewLevel": 1,
+					"viewId": "master",
+					"controlAggregation": "masterPages"
+				},
+				"object": {
+					"viewName": "Detail",
+					"viewId": "detail",
+					"viewLevel": 2
+				},
+				"detailObjectNotFound": {
+					"viewName": "DetailObjectNotFound",
+					"viewId": "detailObjectNotFound"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				}
+			}
+		}
+	}
+}

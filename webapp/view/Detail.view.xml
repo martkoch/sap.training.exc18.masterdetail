@@ -1,0 +1,48 @@
+<mvc:View	busy="true"
+			busyIndicatorDelay="0"
+			xmlns:mvc="sap.ui.core.mvc"
+			xmlns:semantic="sap.m.semantic"
+			xmlns="sap.m"
+			controllerName="sap.training.exc18.masterdetail.controller.Detail">
+			
+	<semantic:DetailPage navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}">
+		<semantic:content>
+			<ObjectHeader intro="{Carrid}" title="{Carrname}">
+				<attributes>
+					<ObjectAttribute text="{Currcode}" title="{i18n>currencyTitle}"/>
+					<ObjectAttribute text="{Url}" title="{i18n>urlTitle}"/>
+				</attributes>
+			</ObjectHeader>
+			<IconTabBar class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter icon="sap-icon://flight">
+						<content>
+							<Table headerText="{i18n>tableHeaderText}" items="{Connections}" noDataText="{i18n>tableNoDataText}">
+								<columns>
+									<Column>
+										<Text text="{i18n>idColumnText}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>cityFromColumnText}"/>
+									</Column>
+									<Column>
+										<Text text="{i18n>cityToColumnText}"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{Connid}"/>
+											<Text text="{Cityfrom}"/>
+											<Text text="{Cityto}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+	</semantic:DetailPage>
+</mvc:View>
